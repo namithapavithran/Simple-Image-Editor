@@ -15,7 +15,8 @@
 		4F2E18B5268489D8009D198A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E18B3268489D8009D198A /* LaunchScreen.storyboard */; };
 		4F2E18C0268489D9009D198A /* ImageEditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18BF268489D9009D198A /* ImageEditorTests.swift */; };
 		4F2E18CB268489D9009D198A /* ImageEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18CA268489D9009D198A /* ImageEditorUITests.swift */; };
-		4F2E18E32685DE4E009D198A /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18E22685DE4E009D198A /* ImagePickerController.swift */; };
+		4F2E18E32685DE4E009D198A /* ProjectDocumentPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */; };
+		4F2E18E82687077E009D198A /* ProjectFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18E72687077E009D198A /* ProjectFileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +51,8 @@
 		4F2E18C6268489D9009D198A /* ImageEditorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageEditorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F2E18CA268489D9009D198A /* ImageEditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorUITests.swift; sourceTree = "<group>"; };
 		4F2E18CC268489D9009D198A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4F2E18E22685DE4E009D198A /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentPickerController.swift; sourceTree = "<group>"; };
+		4F2E18E72687077E009D198A /* ProjectFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +110,8 @@
 				4F2E18B1268489D8009D198A /* Assets.xcassets */,
 				4F2E18B3268489D8009D198A /* LaunchScreen.storyboard */,
 				4F2E18B6268489D8009D198A /* Info.plist */,
-				4F2E18E22685DE4E009D198A /* ImagePickerController.swift */,
+				4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */,
+				4F2E18E72687077E009D198A /* ProjectFileManager.swift */,
 			);
 			path = ImageEditor;
 			sourceTree = "<group>";
@@ -264,7 +267,8 @@
 				4F2E18AD268489D7009D198A /* ViewController.swift in Sources */,
 				4F2E18A9268489D7009D198A /* AppDelegate.swift in Sources */,
 				4F2E18AB268489D7009D198A /* SceneDelegate.swift in Sources */,
-				4F2E18E32685DE4E009D198A /* ImagePickerController.swift in Sources */,
+				4F2E18E32685DE4E009D198A /* ProjectDocumentPickerController.swift in Sources */,
+				4F2E18E82687077E009D198A /* ProjectFileManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,9 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jiH-he-KZk">
-                                <rect key="frame" x="20" y="139" width="374" height="585"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="jiH-he-KZk">
+                                <rect key="frame" x="20" y="139" width="374" height="537.5"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wZa-W7-lJn">
                                 <rect key="frame" x="0.0" y="806.5" width="414" height="89.5"/>
@@ -92,20 +91,36 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 </variation>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="geG-fQ-n3T">
+                                <rect key="frame" x="20" y="696" width="374" height="84"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="jiH-he-KZk" firstAttribute="top" secondItem="6AM-1m-0jy" secondAttribute="bottom" constant="32.5" id="5E7-yx-ld8"/>
                             <constraint firstItem="wZa-W7-lJn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="9wN-10-uAs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="geG-fQ-n3T" secondAttribute="trailing" constant="20" id="Anb-Ll-96Q"/>
                             <constraint firstItem="6AM-1m-0jy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="H5H-kw-ubW"/>
                             <constraint firstItem="wZa-W7-lJn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="J9U-S8-Pxp"/>
+                            <constraint firstItem="jiH-he-KZk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Lzt-UA-4ym"/>
                             <constraint firstItem="6AM-1m-0jy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MQU-LZ-26o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jiH-he-KZk" secondAttribute="trailing" constant="20" id="Mir-Wm-UeA"/>
+                            <constraint firstItem="geG-fQ-n3T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="P34-V3-gO6"/>
+                            <constraint firstItem="geG-fQ-n3T" firstAttribute="top" secondItem="jiH-he-KZk" secondAttribute="bottom" constant="19.5" id="aHr-TV-grH"/>
+                            <constraint firstItem="wZa-W7-lJn" firstAttribute="top" secondItem="geG-fQ-n3T" secondAttribute="bottom" constant="26.5" id="dx1-7H-mhR"/>
                             <constraint firstAttribute="bottom" secondItem="wZa-W7-lJn" secondAttribute="bottom" id="nrb-Ae-bO6"/>
                             <constraint firstItem="wZa-W7-lJn" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.1" id="q8y-aI-ayT"/>
+                            <constraint firstItem="jiH-he-KZk" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="qdH-eG-pMI"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="jiH-he-KZk" id="wOL-Ff-G3y"/>
+                        <outlet property="textView" destination="geG-fQ-n3T" id="3iX-5x-Di7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -119,7 +134,11 @@
         <image name="flip-vertical" width="25" height="25"/>
         <image name="info" width="25" height="25"/>
         <image name="open-file-under-cursor" width="25" height="25"/>
+        <image name="sample" width="543" height="362"/>
         <image name="save" width="25" height="25"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

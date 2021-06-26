@@ -14,36 +14,144 @@ class ViewController: UIViewController {
     //MARK: - Outlets
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var textView: UITextView!
     
     //MARK: - Properties
     
-    var imagePicker: ImagePickerController?
+    var imagePicker: ProjectDocumentPickerController?
+    var verFlipped = false
     
     //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker = ImagePickerController(presentationController: self)
-        imagePicker?.delegate = self
-       
+        imagePicker = ProjectDocumentPickerController(presentationController: self, delegate: self)
+    }
+    
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeRawPointer) {
+        
+        if let error = error {
+            // we got back an error!
+            showAlert(message: error.localizedDescription, title: "Save error")
+            
+        } else {
+            showAlert(message: "Your altered image has been saved to your photos.", title: "Saved!")
+        }
+    
+}
+    func showAlert(message: String,title: String) {
+        
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
     }
 // MARK: - IBActions
 
     @IBAction func openButtonClicked(_ sender: Any) {
-        imagePicker?.implementPicker()
+        imagePicker?.openPicker()
     }
     @IBAction func saveButtonClicked(_ sender: Any) {
+        if let image = imageView.image {
+            imagePicker?.export(image)
+        }
+        
+        //save image to photos album
+       /* if let image = imageView.image {
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        }*/
+        
     }
+
+    
+    
+    
     @IBAction func cropButtonClicked(_ sender: Any) {
+        // The shortest side
+        if let image = imageView.image {
+        let sideLength = min(
+            image.size.width,
+            image.size.height
+        )
+
+        // Determines the x,y coordinate of a centered
+        // sideLength by sideLength square
+        let sourceSize = image.size
+            let xOffset = (sourceSize.width  - sideLength) / 2.0
+        let yOffset = (sourceSize.height - sideLength) / 2.0
+
+        // The cropRect is the rect of the image to keep,
+        // in this case centered
+        let cropRect = CGRect(
+            x: xOffset,
+            y: yOffset,
+            width: sideLength,
+            height: sideLength
+        ).integral
+
+        // Center crop the image
+        let sourceCGImage = image.cgImage!
+        let croppedCGImage = sourceCGImage.cropping(
+            to: cropRect
+        )!
+            let croppedImage = UIImage(cgImage: croppedCGImage, scale: image.scale, orientation: image.imageOrientation)
+            imageView.image = croppedImage
+        }
     }
+    
     @IBAction func flipVerticalButtonClicked(_ sender: Any) {
+        if let image = imageView.image {
+            if verFlipped {
+                let flippedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .up)
+             imageView.image = flippedImage
+                
+            }
+            else {
+            let flippedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .downMirrored)
+         imageView.image = flippedImage
+                
+            }
+            verFlipped = !verFlipped
+        }
     }
     @IBAction func flipHorizontalButtonClicked(_ sender: Any) {
+        if let image = imageView.image {
+           /* let flippedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .downMirrored)
+            imageView.image = flippedImage*/
+            
+            let flippedImage = image.withHorizontallyFlippedOrientation()
+            imageView.image = flippedImage
+        }
+        
     }
+    fileprivate func convertToString(_ dic: CFDictionary) {
+        let info = NSDictionary(dictionary: dic)//["Exif"] as? [String]
+        let exifInfo = info["{Exif}"] as? NSDictionary
+        
+        var strExif = ""
+        if let exifinfo = exifInfo {
+            exifinfo.forEach { (key,value) in
+                strExif += "\(key) : \(value) \n"
+                print(strExif)
+            }
+            showExif(strExif)
+        }
+    }
+    
+    func showExif(_ info: String) {
+        textView.text = info
+    }
+    
     @IBAction func infoButtonClicked(_ sender: Any) {
+        let dict = imageView.image?.getExifData()
+        if let dic = dict {
+            convertToString(dic)
+    }
     }
 }
-
+     
 
 extension ViewController: ProjectImageDelegate {
     func didSelect(image: UIImage?) {
