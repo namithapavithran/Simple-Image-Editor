@@ -17,6 +17,8 @@
 		4F2E18CB268489D9009D198A /* ImageEditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18CA268489D9009D198A /* ImageEditorUITests.swift */; };
 		4F2E18E32685DE4E009D198A /* ProjectDocumentPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */; };
 		4F2E18E82687077E009D198A /* ProjectFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18E72687077E009D198A /* ProjectFileManager.swift */; };
+		4F2E18F02687A664009D198A /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18EF2687A664009D198A /* OverlayViewController.swift */; };
+		4F2E18F52687B0F4009D198A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E18F42687B0F4009D198A /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		4F2E18CC268489D9009D198A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDocumentPickerController.swift; sourceTree = "<group>"; };
 		4F2E18E72687077E009D198A /* ProjectFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileManager.swift; sourceTree = "<group>"; };
+		4F2E18EF2687A664009D198A /* OverlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayViewController.swift; sourceTree = "<group>"; };
+		4F2E18F42687B0F4009D198A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,8 @@
 				4F2E18B6268489D8009D198A /* Info.plist */,
 				4F2E18E22685DE4E009D198A /* ProjectDocumentPickerController.swift */,
 				4F2E18E72687077E009D198A /* ProjectFileManager.swift */,
+				4F2E18EF2687A664009D198A /* OverlayViewController.swift */,
+				4F2E18F42687B0F4009D198A /* ImagePicker.swift */,
 			);
 			path = ImageEditor;
 			sourceTree = "<group>";
@@ -267,6 +273,8 @@
 				4F2E18AD268489D7009D198A /* ViewController.swift in Sources */,
 				4F2E18A9268489D7009D198A /* AppDelegate.swift in Sources */,
 				4F2E18AB268489D7009D198A /* SceneDelegate.swift in Sources */,
+				4F2E18F52687B0F4009D198A /* ImagePicker.swift in Sources */,
+				4F2E18F02687A664009D198A /* OverlayViewController.swift in Sources */,
 				4F2E18E32685DE4E009D198A /* ProjectDocumentPickerController.swift in Sources */,
 				4F2E18E82687077E009D198A /* ProjectFileManager.swift in Sources */,
 			);

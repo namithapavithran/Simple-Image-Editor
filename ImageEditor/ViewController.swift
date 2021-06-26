@@ -13,19 +13,26 @@ class ViewController: UIViewController {
     
     //MARK: - Outlets
     
+    @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet var textView: UITextView!
+   
+    @IBOutlet weak var messageLabel: UILabel!
+    
     
     //MARK: - Properties
     
-    var imagePicker: ProjectDocumentPickerController?
+    var documentPicker: ProjectDocumentPickerController?
+    var imagePicker: ImagePicker!
     var verFlipped = false
+    var present = false
     
     //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker = ProjectDocumentPickerController(presentationController: self, delegate: self)
+        documentPicker = ProjectDocumentPickerController(presentationController: self, delegate: self)
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+       
     }
     
     
@@ -48,26 +55,46 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
         
     }
+    
+    func showOpenOptions() {
+        
+    }
 // MARK: - IBActions
 
     @IBAction func openButtonClicked(_ sender: Any) {
-        imagePicker?.openPicker()
+        //imagePicker?.openPicker()
+        let alertController = UIAlertController(title: "nil", message: "select an option to open your photo", preferredStyle: .actionSheet)
+
+        let action = UIAlertAction(title: "Open from Files", style: .default) { (action) in
+            self.documentPicker?.openPicker()
+        }
+        let action1 = UIAlertAction(title: "Open from Photos album", style: .default) { (action) in
+            self.imagePicker.present()
+        }
+        alertController.addAction(action)
+        alertController.addAction(action1)
+        present(alertController, animated: true, completion: nil)
     }
     @IBAction func saveButtonClicked(_ sender: Any) {
-        if let image = imageView.image {
-            imagePicker?.export(image)
-        }
         
-        //save image to photos album
-       /* if let image = imageView.image {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-        }*/
-        
-    }
+        let alertController = UIAlertController(title: nil, message: "Select an option to save your photo", preferredStyle: .actionSheet)
 
-    
-    
-    
+        let action = UIAlertAction(title: "Files", style: .default) { (action) in
+            if let image = self.imageView.image {
+                self.documentPicker?.export(image)
+            }
+        }
+        let action1 = UIAlertAction(title: "Save in Photos album", style: .default) { (action) in
+            if let image = self.imageView.image {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+             }
+        }
+        alertController.addAction(action)
+        alertController.addAction(action1)
+        present(alertController, animated: true, completion: nil)
+      
+    }
+ 
     @IBAction func cropButtonClicked(_ sender: Any) {
         // The shortest side
         if let image = imageView.image {
@@ -118,15 +145,13 @@ class ViewController: UIViewController {
     }
     @IBAction func flipHorizontalButtonClicked(_ sender: Any) {
         if let image = imageView.image {
-           /* let flippedImage = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: .downMirrored)
-            imageView.image = flippedImage*/
-            
+       
             let flippedImage = image.withHorizontallyFlippedOrientation()
             imageView.image = flippedImage
         }
         
     }
-    fileprivate func convertToString(_ dic: CFDictionary) {
+    fileprivate func convertToString(_ dic: CFDictionary) -> String? {
         let info = NSDictionary(dictionary: dic)//["Exif"] as? [String]
         let exifInfo = info["{Exif}"] as? NSDictionary
         
@@ -136,18 +161,41 @@ class ViewController: UIViewController {
                 strExif += "\(key) : \(value) \n"
                 print(strExif)
             }
-            showExif(strExif)
+            
+            return strExif
+        }
+        return nil
+    }
+    
+   
+    
+    func presentingOverlay(_ present: Bool) {
+        overlayView.isHidden = !present
+        if present {
+            view.backgroundColor = .gray
+            view.bringSubviewToFront(overlayView)
+            overlayView.alpha = 1
+        }
+        else {
+            
+            view.backgroundColor = .white
         }
     }
     
-    func showExif(_ info: String) {
-        textView.text = info
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        presentingOverlay(false)
     }
-    
+   
     @IBAction func infoButtonClicked(_ sender: Any) {
+        
         let dict = imageView.image?.getExifData()
         if let dic = dict {
-            convertToString(dic)
+            let info = convertToString(dic) ?? "nil"
+           
+            let textView = overlayView.subviews[0].subviews[0] as? UITextView
+            textView?.text = info
+      
+            presentingOverlay(true)
     }
     }
 }
@@ -157,9 +205,19 @@ extension ViewController: ProjectImageDelegate {
     func didSelect(image: UIImage?) {
         if let image = image {
             imageView.image = image
+            messageLabel.isHidden = true
         }
     }
    
+}
+
+extension ViewController: ImagePickerDelegate {
+    func didPick (image: UIImage?) {
+        if let image = image {
+            imageView.image = image
+            messageLabel.isHidden = true
+        }
+    }
 }
 
 //code to open file
